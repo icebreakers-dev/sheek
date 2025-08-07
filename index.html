@@ -156,25 +156,26 @@
   <section id="careers">
     <h2>Join Our Crew</h2>
     <p>We’re always looking for top-tier AV talent.</p>
-    <form id="joinCrewForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdgqxCoVbSnsVnLkvFDJxypx4qPWJk6Ob-Z9fq1j0s_AmSR4A/formResponse" method="POST" target="gform_iframe">
+    <form id="joinCrewForm">
       <input type="text" name="entry.1111111" placeholder="Full Name" required>
       <input type="email" name="entry.2222222" placeholder="Email Address" required>
       <input type="text" name="entry.3333333" placeholder="Position Interested" required>
       <textarea name="entry.4444444" placeholder="Your Experience"></textarea>
-      <button id="joinSubmit" type="submit">Submit</button>
+      <button type="submit">Submit</button>
     </form>
-    <iframe name="gform_iframe" id="gform_iframe" style="display:none;"></iframe>
-    <p id="joinMsg"></p>
     <script>
-      const joinForm = document.getElementById('joinCrewForm');
-      const joinButton = document.getElementById('joinSubmit');
-      const joinMsg = document.getElementById('joinMsg');
-      const gformFrame = document.getElementById('gform_iframe');
-      joinForm.addEventListener('submit', function() {
-        joinButton.disabled = true;
-      });
-      gformFrame.addEventListener('load', function() {
-        joinMsg.textContent = 'Thanks!';
+      document.getElementById('joinCrewForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const fullName = encodeURIComponent(document.querySelector('input[name="entry.1111111"]').value);
+        const email = encodeURIComponent(document.querySelector('input[name="entry.2222222"]').value);
+        const position = encodeURIComponent(document.querySelector('input[name="entry.3333333"]').value);
+        const experience = encodeURIComponent(document.querySelector('textarea[name="entry.4444444"]').value);
+        const url = 'https://docs.google.com/forms/d/e/1FAIpQLSdgqxCoVbSnsVnLkvFDJxypx4qPWJk6Ob-Z9fq1j0s_AmSR4A/viewform'
+          + '?entry.1111111=' + fullName
+          + '&entry.2222222=' + email
+          + '&entry.3333333=' + position
+          + '&entry.4444444=' + experience;
+        location.href = url;
       });
     </script>
   </section>
@@ -182,14 +183,31 @@
   <!-- Contact Section -->
   <section id="contact">
     <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="text" placeholder="Company / Event">
-      <input type="date" placeholder="Event Date">
-      <textarea placeholder="How can we help?" rows="5"></textarea>
+    <form id="contactForm">
+      <input type="text" name="entry.5555555" placeholder="Name" required>
+      <input type="email" name="entry.6666666" placeholder="Email" required>
+      <input type="text" name="entry.7777777" placeholder="Company / Event">
+      <input type="date" name="entry.8888888" placeholder="Event Date">
+      <textarea name="entry.9999999" placeholder="How can we help?" rows="5"></textarea>
       <button type="submit">Send Message</button>
     </form>
+    <script>
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = encodeURIComponent(document.querySelector('input[name="entry.5555555"]').value);
+        const email = encodeURIComponent(document.querySelector('input[name="entry.6666666"]').value);
+        const company = encodeURIComponent(document.querySelector('input[name="entry.7777777"]').value);
+        const eventDate = encodeURIComponent(document.querySelector('input[name="entry.8888888"]').value);
+        const help = encodeURIComponent(document.querySelector('textarea[name="entry.9999999"]').value);
+        const url = 'https://docs.google.com/forms/d/1F3SLM3PdFjhNzDWym0dgJtzDz9ckosf8ikLd9_evwNE/viewform'
+          + '?entry.5555555=' + name
+          + '&entry.6666666=' + email
+          + '&entry.7777777=' + company
+          + '&entry.8888888=' + eventDate
+          + '&entry.9999999=' + help;
+        location.href = url;
+      });
+    </script>
     <p>Phone: 818-216-7329 | Email: sheeksolutions@gmail.com</p>
     <div id="map" style="width:100%;height:300px;"></div>
   </section>
