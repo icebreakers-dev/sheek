@@ -14,7 +14,7 @@ img, video { max-width: 100%; height: auto; }
 /* <=900px — mobile/tablet nav */
 @media (max-width: 900px){
   .nav-container{ flex-wrap: wrap; gap: .5rem; align-items: center; }
-  .nav-logo img{ max-height: 28px; }
+  .nav-logo .logo-img{ max-height: 31px; }
 
   .nav-toggle{
     display: inline-block;
@@ -86,4 +86,12 @@ img, video { max-width: 100%; height: auto; }
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce){
   .hero{ animation: none; opacity: 1; transform: none; }
+}
+
+/* Desktop-only hero background tweak */
+@media (min-width: 1024px){
+  .hero{
+    background-size: 95% auto !important; /* 5% smaller than current */
+    background-position: top center;      /* keep it centered at the top */
+  }
 }
