@@ -62,12 +62,47 @@
     }
     .nav-logo .logo-img { max-height:36px; width:auto; object-fit:contain; }
     .nav-toggle { display:none; }
-    nav ul { list-style:none; display:flex; gap:1.5rem; }
+    nav ul { list-style:none; display:flex; gap:1.5rem; align-items:center; }
+    nav ul li { position:relative; }
     nav ul li a {
       font-weight:600; font-size:.88rem; color:var(--primary);
       letter-spacing:.02em; transition:color .2s;
     }
     nav ul li a:hover { color:var(--accent); }
+
+    /* ── DROPDOWN MENUS ───────────────────────────────── */
+    .dropdown > a {
+      display:inline-flex; align-items:center; gap:.25rem;
+    }
+    .dropdown > a::after {
+      content:"▾"; font-size:.65rem; transition:transform .2s; line-height:1;
+    }
+    .dropdown:hover > a::after,
+    .dropdown.open > a::after { transform:rotate(180deg); }
+
+    .dropdown-menu {
+      position:absolute; top:calc(100% + .6rem); left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      background:#fff; border:1px solid var(--border);
+      border-radius:var(--radius); box-shadow:var(--shadow-lg);
+      min-width:200px; padding:.4rem 0; list-style:none;
+      opacity:0; pointer-events:none;
+      transition:opacity .18s, transform .18s;
+      z-index:200;
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown.open .dropdown-menu {
+      opacity:1; pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
+    }
+    .dropdown-menu li a {
+      display:block; padding:.6rem 1.1rem;
+      font-size:.84rem; font-weight:600;
+      color:var(--primary); white-space:nowrap;
+      transition:background .15s, color .15s;
+    }
+    .dropdown-menu li a:hover { background:var(--bg-alt); color:var(--accent); }
+    .dropdown-divider { height:1px; background:var(--border); margin:.3rem 0; }
 
     /* ── BUTTONS ──────────────────────────────────────── */
     .btn {
@@ -94,28 +129,30 @@
     @keyframes fadeSlideUp { to { opacity:1; transform:translateY(0); } }
     @media (prefers-reduced-motion:reduce) { .hero { animation:none; opacity:1; transform:none; } }
 
-    @media (min-width:1024px) {
-      .hero {
-        background:url("https://imgur.com/1qSwsv5.png") top center / contain no-repeat;
-        min-height:520px;
-        height:clamp(520px, 60vw, 780px);
-      }
-      .hero-art-mobile { display:none !important; }
+    .hero {
+      background: url("https://res.cloudinary.com/dewklkyzj/image/upload/v1770226934/SSShowcalling_js8gdu.png") center / cover no-repeat;
+      min-height: 520px;
+      height: clamp(520px, 60vw, 780px);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 15, 40, 0.52);
+      z-index: 1;
     }
 
-    .hero-art-mobile {
-      width:68vw; max-width:400px; height:auto;
-      margin:0 auto 1.25rem;
-    }
+    .hero-art-mobile { display:none !important; }
+
     .hero-content { position:relative; z-index:2; }
     .hero-content h1 {
       font-family:var(--font-heading);
       font-size:clamp(1.8rem, 4vw, 3.25rem);
-      color:var(--primary); margin-bottom:1rem; line-height:1.15;
+      color:#fff; margin-bottom:1rem; line-height:1.15;
     }
     .hero-content p {
-      font-size:clamp(1rem, 2vw, 1.2rem); color:var(--primary);
-      opacity:.8; margin-bottom:2rem;
+      font-size:clamp(1rem, 2vw, 1.2rem); color:#fff;
+      opacity:.88; margin-bottom:2rem;
       max-width:540px; margin-left:auto; margin-right:auto;
     }
 
@@ -281,8 +318,23 @@
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="rental.html">Rental</a></li>
+          <li class="dropdown">
+            <a href="#services">Services</a>
+            <ul class="dropdown-menu">
+              <li><a href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Show%20Calling&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Show%20Calling%20services.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]">Show Calling</a></li>
+              <li><a href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Audio%20Engineering&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Audio%20Engineering%20services.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]">Audio Engineering</a></li>
+              <li><a href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Video%20%26%20Streaming&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Video%20%26%20Streaming%20services.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]">Video &amp; Streaming</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="rental.html">Rental</a>
+            <ul class="dropdown-menu">
+              <li><a href="rental.html#audio">Audio Equipment</a></li>
+              <li><a href="rental.html#video">Video Equipment</a></li>
+              <li><a href="rental.html#lighting">Lighting &amp; Staging</a></li>
+              <li><a href="rental.html#streaming">Streaming &amp; Recording</a></li>
+            </ul>
+          </li>
           <li><a href="#rates">Rates</a></li>
           <li><a href="#careers">Careers</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -294,7 +346,6 @@
   <!-- ── HERO ── -->
   <section id="home" class="hero">
     <div class="hero-content">
-      <img class="hero-art-mobile" src="https://imgur.com/1qSwsv5.png" alt="Sheek Solutions logo">
       <h1>Scalable AV &amp; Production Professionals</h1>
       <p>Nationwide staffing for corporate events, broadcast, and live productions.</p>
       <button class="btn btn-primary" data-quote-trigger>Request a Quote</button>
@@ -707,9 +758,10 @@
   })();
   </script>
 
-  <!-- Nav toggle -->
+  <!-- Nav toggle + dropdown handling -->
   <script>
   (function(){
+    // Mobile hamburger
     var header = document.querySelector('header');
     var toggle = document.getElementById('navToggle');
     if(toggle && header){
@@ -718,6 +770,29 @@
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     }
+
+    // Dropdown: hover works via CSS on desktop.
+    // On touch / mobile, toggle .open on the parent <li> when the top-level link is tapped.
+    document.querySelectorAll('.dropdown > a').forEach(function(link){
+      link.addEventListener('click', function(e){
+        var li = link.parentElement;
+        var isMobile = window.innerWidth <= 900;
+        if(isMobile){
+          e.preventDefault();
+          var wasOpen = li.classList.contains('open');
+          // Close all other dropdowns
+          document.querySelectorAll('.dropdown.open').forEach(function(el){ el.classList.remove('open'); });
+          if(!wasOpen) li.classList.add('open');
+        }
+      });
+    });
+
+    // Close open dropdowns when clicking outside
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.dropdown')){
+        document.querySelectorAll('.dropdown.open').forEach(function(el){ el.classList.remove('open'); });
+      }
+    });
   })();
   </script>
 

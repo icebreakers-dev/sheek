@@ -27,6 +27,20 @@ img, video { max-width:100%; height:auto; }
   #mainNav{ display:none; width:100%; order:3; }
   header.nav-open #mainNav{ display:block; }
   #mainNav ul{ display:flex; flex-direction:column; gap:.65rem; padding:.5rem 0 .25rem; }
+
+  /* Mobile dropdowns — expand inline */
+  .dropdown-menu{
+    position:static !important;
+    transform:none !important;
+    opacity:1 !important; pointer-events:auto !important;
+    box-shadow:none; border:none;
+    border-left:2px solid var(--accent, #FFA500);
+    border-radius:0; padding:.15rem 0 .15rem .85rem;
+    margin:.25rem 0 .1rem;
+    display:none;
+  }
+  .dropdown.open .dropdown-menu{ display:block; }
+  .dropdown > a::after{ display:inline-block; }
 }
 
 /* ── MOBILE  ≤768px ──────────────────────────────────── */
