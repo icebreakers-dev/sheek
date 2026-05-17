@@ -4,147 +4,286 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sheek Solutions LLC</title>
-  <style>
-    /* CSS Variables for Branding */
-    :root {
-      --primary-color: #003366;
-      --accent-color: #FFA500;
-      --font-heading: 'Montserrat', sans-serif;
-      --font-body: 'Roboto', sans-serif;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: var(--font-body); color: #333; }
-    a { text-decoration:none; color: inherit; }
-    header { position: sticky; top:0; background:#fff; border-bottom:1px solid #eee; }
-    .nav-container { display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto; padding:1rem; }
-    .nav-logo .logo-img { max-height:40px; }
-    nav ul { list-style:none; display:flex; gap:1.5rem; }
-    nav ul li a { font-weight:600; color: var(--primary-color); }
-    nav ul li a:hover { color: var(--accent-color); }
-    section { padding:4rem 1rem; max-width:1200px; margin:0 auto; }
-    .hero { position:relative; display:flex; align-items:center; justify-content:center; }
-    .hero::after { content:""; position:absolute; inset:0; background: transparent; }
-    .hero::before, .hero::after, .hero-overlay {
-      pointer-events: none !important;
-      z-index: 0 !important;
-    }
-    .hero-content { position:relative; z-index:2; text-align:center; color: var(--primary-color); }
-    .hero-content h1 { font-family: var(--font-heading); font-size:3rem; margin-bottom:1rem; }
-    .hero-content p { font-size:1.2rem; opacity:0.8; margin-bottom:2rem; }
-      /* hero-title-mobile styles moved to mobile.css */
-    .btn-primary { background: var(--accent-color); color:#fff; padding:0.75rem 2rem; font-weight:600; border:none; cursor:pointer; }
-    .btn-overlay { position:relative; display:inline-block; padding:0.25rem 0.5rem; font-weight:600; color: var(--primary-color); }
-    .btn-overlay::before { content:""; position:absolute; inset:0; background:#ffff00; z-index:-1; border-radius:4px; }
-    .services-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:2rem; margin-top:2rem; }
-    .card { position:relative; background:#f9f9f9; padding:1.5rem; border-radius:8px; text-align:center; overflow:hidden; }
-    .card .card-overlay { position:absolute; top:0; left:0; width:100%; height:220px; object-fit:cover; pointer-events:none; z-index:0; }
-    .card > *:not(.card-overlay) { position:relative; z-index:1; }
-    .card h3 { margin:1rem 0; font-family: var(--font-heading); }
-    .glow-text { text-shadow: 0 0 5px rgba(255, 255, 255, 0.8); }
-    .glow-icon { filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)); }
-    .clients-carousel { display:flex; overflow-x:auto; gap:2rem; padding:2rem 0; }
-    .clients-carousel img { max-height:60px; filter:grayscale(100%); transition: filter 0.3s; }
-    .clients-carousel img:hover { filter:grayscale(0%); }
-      .three-cols .col { text-align:center; }
-      .col h4 { font-family: var(--font-heading); margin-bottom:0.5rem; color: var(--primary-color); }
-    form { display:grid; gap:1rem; }
-    form input, form textarea, form button { width:100%; padding:0.75rem; font-size:1rem; }
-    form button { background: var(--primary-color); color:#fff; border:none; cursor:pointer; }
-    footer { background:#003366; color:#fff; text-align:center; padding:2rem 1rem; }
-    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; }
-    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 8px; }
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:1000}
-    .modal-backdrop.show{display:flex}
-    .modal{background:#fff;border-radius:10px;max-width:520px;width:92%;padding:1.25rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .modal h3{margin:0 0 .75rem;font-family:var(--font-heading);color:var(--primary-color)}
-    .modal .row{display:grid;gap:.75rem;margin:.5rem 0}
-    .modal .actions{display:flex;gap:.75rem;justify-content:flex-end;margin-top:1rem}
-    .btn{background:var(--primary-color);color:#fff;padding:.6rem 1rem;border:none;border-radius:6px;cursor:pointer;font-weight:700}
-    .btn.secondary{background:#999}
-
-      /* mobile responsive rules moved to mobile.css */
-
-      .nav-toggle { display: none; }
-
-      .three-cols { display: grid; gap: 1.25rem; }
-      @media (min-width: 700px) {
-        .three-cols { grid-template-columns: repeat(3, 1fr); }
-      }
-
-    /* Cards & overlays behave on mobile */
-    .card { border-radius: 8px; overflow: hidden; }
-    .card .card-overlay {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16/9;   /* keeps a nice banner ratio on small screens */
-      object-fit: cover;
-    }
-    /* mobile-specific rules moved to mobile.css */
-
-    /* Hero load-in animation */
-    .hero{
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideUp 2.5s ease forwards;
-      will-change: transform, opacity;
-    }
-
-    @keyframes fadeSlideUp{
-      to{
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Respect users who prefer reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .hero{ animation: none; opacity: 1; transform: none; }
-    }
-
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="mobile.css">
   <style>
-
-    /* Mobile-first: show the inline image */
-    .hero-art-mobile{
-      display: block !important;
-      width: 68vw; max-width: 420px; height: auto;
-      margin: 0 auto 12px;
+    /* ── DESIGN TOKENS ────────────────────────────────── */
+    :root {
+      --primary:       #003366;
+      --primary-light: #0a4d99;
+      --accent:        #FFA500;
+      --accent-dark:   #e69400;
+      --text:          #1a202c;
+      --text-muted:    #6b7280;
+      --bg:            #ffffff;
+      --bg-alt:        #f5f8fc;
+      --border:        #e5e7eb;
+      --radius:        10px;
+      --shadow:        0 4px 20px rgba(0,0,0,.08);
+      --shadow-lg:     0 12px 40px rgba(0,0,0,.14);
+      --font-heading:  'Montserrat', sans-serif;
+      --font-body:     'Roboto', sans-serif;
+      --max-w:         1200px;
+      --vh:            100dvh;
     }
 
-  </style>
-  <style>
-    /* Desktop-only: show the full logo without cropping */
-    @media (min-width: 1024px){
-      .hero{
-        background: url("https://imgur.com/1qSwsv5.png") top center / contain no-repeat !important;
+    /* ── RESET ────────────────────────────────────────── */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    img, video { max-width:100%; height:auto; display:block; }
+    a { text-decoration:none; color:inherit; }
+    body { font-family:var(--font-body); color:var(--text); background:var(--bg); line-height:1.6; }
 
-        /* Let the section size itself so the entire image is visible on any monitor */
-        height: auto;
-        min-height: 520px;            /* baseline height */
-        height: clamp(520px, 60vw, 780px);  /* scales with screen, capped */
+    /* ── LAYOUT ───────────────────────────────────────── */
+    .container { max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; }
+    section { padding:5rem 0; }
+    section.alt { background:var(--bg-alt); }
 
-        padding-block: 2rem;          /* breathing room for text/button */
+    .section-header { text-align:center; margin-bottom:3rem; }
+    .section-header h2 {
+      font-family:var(--font-heading);
+      font-size:clamp(1.6rem, 3vw, 2.4rem);
+      color:var(--primary); margin-bottom:.6rem;
+    }
+    .section-header p { color:var(--text-muted); font-size:1rem; max-width:560px; margin:0 auto; }
+    .section-label {
+      display:inline-block; font-size:.72rem; font-weight:700;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:.5rem;
+    }
+
+    /* ── HEADER / NAV ─────────────────────────────────── */
+    header { position:sticky; top:0; background:#fff; border-bottom:1px solid var(--border); z-index:100; }
+    .nav-container {
+      display:flex; align-items:center; justify-content:space-between;
+      max-width:var(--max-w); margin:0 auto; padding:.9rem 1.5rem;
+    }
+    .nav-logo .logo-img { max-height:36px; width:auto; object-fit:contain; }
+    .nav-toggle { display:none; }
+    nav ul { list-style:none; display:flex; gap:1.5rem; }
+    nav ul li a {
+      font-weight:600; font-size:.88rem; color:var(--primary);
+      letter-spacing:.02em; transition:color .2s;
+    }
+    nav ul li a:hover { color:var(--accent); }
+
+    /* ── BUTTONS ──────────────────────────────────────── */
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+      padding:.75rem 1.75rem; border:none; border-radius:8px;
+      font-weight:700; font-size:.95rem; cursor:pointer; transition:all .2s;
+      font-family:var(--font-body);
+    }
+    .btn-primary { background:var(--accent); color:#fff; }
+    .btn-primary:hover { background:var(--accent-dark); transform:translateY(-1px); box-shadow:0 4px 14px rgba(255,165,0,.4); }
+    .btn-outline { background:transparent; color:var(--primary); border:2px solid var(--primary); }
+    .btn-outline:hover { background:var(--primary); color:#fff; }
+    .btn-white { background:#fff; color:var(--primary); }
+    .btn-white:hover { background:#eef3ff; }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      position:relative; display:flex; align-items:center; justify-content:center;
+      min-height:540px; padding:4rem 1.5rem; text-align:center;
+      opacity:0; transform:translateY(20px);
+      animation:fadeSlideUp 2.5s ease forwards;
+      will-change:transform, opacity;
+    }
+    @keyframes fadeSlideUp { to { opacity:1; transform:translateY(0); } }
+    @media (prefers-reduced-motion:reduce) { .hero { animation:none; opacity:1; transform:none; } }
+
+    @media (min-width:1024px) {
+      .hero {
+        background:url("https://imgur.com/1qSwsv5.png") top center / contain no-repeat;
+        min-height:520px;
+        height:clamp(520px, 60vw, 780px);
       }
-      .hero-art-mobile{ display: none !important; }
+      .hero-art-mobile { display:none !important; }
     }
+
+    .hero-art-mobile {
+      width:68vw; max-width:400px; height:auto;
+      margin:0 auto 1.25rem;
+    }
+    .hero-content { position:relative; z-index:2; }
+    .hero-content h1 {
+      font-family:var(--font-heading);
+      font-size:clamp(1.8rem, 4vw, 3.25rem);
+      color:var(--primary); margin-bottom:1rem; line-height:1.15;
+    }
+    .hero-content p {
+      font-size:clamp(1rem, 2vw, 1.2rem); color:var(--primary);
+      opacity:.8; margin-bottom:2rem;
+      max-width:540px; margin-left:auto; margin-right:auto;
+    }
+
+    /* ── SERVICES ─────────────────────────────────────── */
+    .services-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:1.75rem;
+    }
+    .service-card {
+      position:relative; overflow:hidden; border-radius:var(--radius);
+      min-height:280px; display:flex; flex-direction:column; justify-content:flex-end;
+      box-shadow:var(--shadow);
+    }
+    .service-card .card-bg {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;
+    }
+    .service-card::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,20,50,.8) 0%, rgba(0,20,50,.05) 65%);
+      z-index:1;
+    }
+    .service-card-body { position:relative; z-index:2; padding:1.5rem; color:#fff; }
+    .service-card-body h3 { font-family:var(--font-heading); font-size:1.15rem; margin-bottom:.4rem; }
+    .service-card-body p { font-size:.9rem; opacity:.9; margin-bottom:.9rem; }
+    .btn-learn {
+      display:inline-block; padding:.45rem 1rem;
+      background:rgba(255,255,255,.2); backdrop-filter:blur(4px);
+      border:1px solid rgba(255,255,255,.55); border-radius:6px;
+      color:#fff; font-size:.85rem; font-weight:700; transition:background .2s;
+    }
+    .btn-learn:hover { background:rgba(255,255,255,.35); }
+
+    /* ── BRAND VIDEO ──────────────────────────────────── */
+    #brand-video { background:#000; padding:3rem 0; }
+    #brand-video .container { max-width:960px; }
+    .video-wrap { position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; }
+    .video-wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+    /* ── CLIENTS ──────────────────────────────────────── */
+    .clients-carousel {
+      display:flex; overflow-x:auto; gap:2.5rem; padding:1.5rem 0;
+      align-items:center; scrollbar-width:none; -ms-overflow-style:none;
+    }
+    .clients-carousel::-webkit-scrollbar { display:none; }
+    .clients-carousel img {
+      max-height:56px; width:auto; flex-shrink:0;
+      filter:grayscale(100%); opacity:.65; transition:filter .3s, opacity .3s;
+    }
+    .clients-carousel img:hover { filter:grayscale(0%); opacity:1; }
+
+    /* ── WHY SHEEK ────────────────────────────────────── */
+    .why-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:1.75rem;
+    }
+    .why-card {
+      text-align:center; padding:2rem 1.5rem;
+      background:#fff; border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .why-icon { font-size:2rem; margin-bottom:.9rem; }
+    .why-card h4 { font-family:var(--font-heading); font-size:1rem; color:var(--primary); margin-bottom:.5rem; }
+    .why-card p { color:var(--text-muted); font-size:.9rem; }
+
+    /* ── RATES ────────────────────────────────────────── */
+    #rates { background:var(--primary); }
+    #rates .section-header h2 { color:#fff; }
+    #rates .section-header p { color:rgba(255,255,255,.75); }
+    #rates .section-header { margin-bottom:2rem; }
+
+    /* ── CAREERS ──────────────────────────────────────── */
+    .careers-form-wrap { max-width:580px; margin:0 auto; }
+
+    /* ── FORMS ────────────────────────────────────────── */
+    form { display:grid; gap:.85rem; }
+    form input, form textarea, form select {
+      width:100%; padding:.8rem 1rem; font-size:1rem;
+      font-family:var(--font-body); border:1px solid var(--border);
+      border-radius:8px; background:#fff; color:var(--text);
+      transition:border-color .2s, box-shadow .2s;
+    }
+    form input:focus, form textarea:focus {
+      outline:none; border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(0,51,102,.1);
+    }
+    form button {
+      width:100%; padding:.85rem 1rem; font-size:1rem;
+      font-family:var(--font-body); font-weight:700;
+      background:var(--primary); color:#fff; border:none;
+      border-radius:8px; cursor:pointer; transition:background .2s;
+    }
+    form button:hover { background:var(--primary-light); }
+
+    /* ── CONTACT ──────────────────────────────────────── */
+    .contact-grid { display:grid; gap:3rem; }
+    @media (min-width:900px) { .contact-grid { grid-template-columns:1fr 1fr; } }
+
+    .contact-info { display:flex; flex-direction:column; gap:1.25rem; margin-bottom:1.5rem; }
+    .contact-info-item { display:flex; gap:.85rem; align-items:flex-start; }
+    .ci-icon { font-size:1.1rem; flex-shrink:0; margin-top:.15rem; }
+    .ci-label { font-family:var(--font-heading); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--primary); margin-bottom:.15rem; display:block; }
+    .contact-info-item a { color:var(--text); transition:color .2s; }
+    .contact-info-item a:hover { color:var(--accent); }
+    #osm-map { width:100%; height:260px; border-radius:var(--radius); border:1px solid var(--border); }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer { background:var(--primary); color:#fff; }
+    .footer-inner {
+      display:grid; gap:2.5rem; padding:3rem 0;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:700px) {
+      .footer-inner { grid-template-columns:1.4fr 1fr; align-items:start; }
+    }
+    .footer-brand .logo-img { max-height:34px; filter:brightness(0) invert(1); margin-bottom:.85rem; }
+    .footer-brand p { font-size:.88rem; opacity:.7; max-width:340px; line-height:1.6; }
+    .footer-nav-heading { font-family:var(--font-heading); font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; opacity:.5; margin-bottom:.85rem; }
+    .footer-links { display:flex; flex-direction:column; gap:.55rem; }
+    .footer-links a { font-size:.88rem; opacity:.75; transition:opacity .2s; }
+    .footer-links a:hover { opacity:1; }
+    .footer-bottom {
+      border-top:1px solid rgba(255,255,255,.15);
+      padding:1.25rem 0; text-align:center;
+      font-size:.8rem; opacity:.55;
+    }
+
+    /* ── MODAL (rq-* classes injected by JS) ─────────── */
+    .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:1000; }
+    .modal-backdrop.show { display:flex; }
+    .modal { background:#fff; border-radius:10px; max-width:520px; width:92%; padding:1.25rem; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+    .modal h3 { margin:0 0 .75rem; font-family:var(--font-heading); color:var(--primary); }
+    .modal .row { display:grid; gap:.75rem; margin:.5rem 0; }
+    .modal .actions { display:flex; gap:.75rem; justify-content:flex-end; margin-top:1rem; }
+
+    /* ── MOBILE MODAL CONSTRAINTS ─────────────────────── */
+    .rq-modal, .modal {
+      display:flex; flex-direction:column;
+      width:min(680px, 100%);
+      max-height:calc(var(--vh) - 24px);
+      border-radius:14px; overflow:hidden;
+    }
+    .rq-body, #ratesForm { flex:1 1 auto; overflow:auto; -webkit-overflow-scrolling:touch; }
+    .rq-actions, .modal .actions {
+      position:sticky; bottom:0; background:#fff;
+      padding:12px 18px calc(12px + env(safe-area-inset-bottom, 0));
+      border-top:1px solid #eee; z-index:1;
+    }
+    html.modal-open, body.modal-open { overflow:hidden; height:100%; }
+    .rq-backdrop::before, .rq-backdrop::after { pointer-events:none; }
   </style>
-  
-  </head>
+</head>
 <body>
-  <!-- Header & Navigation -->
+
+  <!-- ── HEADER ── -->
   <header>
     <div class="nav-container">
-      <div class="nav-logo"><a href="#"><img src="https://imgur.com/1qSwsv5.png" alt="Sheek Solutions Logo" class="logo-img"></a></div>
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
-        ☰
-      </button>
+      <div class="nav-logo">
+        <a href="#home"><img src="https://imgur.com/1qSwsv5.png" alt="Sheek Solutions Logo" class="logo-img"></a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">☰</button>
       <nav id="mainNav">
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#rates">Rates &amp; Packages</a></li>
+          <li><a href="rental.html">Rental</a></li>
+          <li><a href="#rates">Rates</a></li>
           <li><a href="#careers">Careers</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -152,442 +291,435 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- ── HERO ── -->
   <section id="home" class="hero">
     <div class="hero-content">
       <img class="hero-art-mobile" src="https://imgur.com/1qSwsv5.png" alt="Sheek Solutions logo">
-      <h1 class="hero-title-desktop">Scalable AV &amp; Production Professionals</h1>
-      <h1 class="hero-title-mobile">Scalable AV &amp; Production Professionals</h1>
+      <h1>Scalable AV &amp; Production Professionals</h1>
       <p>Nationwide staffing for corporate events, broadcast, and live productions.</p>
-      <button class="rq-btn" data-quote-trigger>Request a Quote</button>
+      <button class="btn btn-primary" data-quote-trigger>Request a Quote</button>
     </div>
   </section>
 
-  <!-- Core Services Teaser -->
+  <!-- ── SERVICES ── -->
   <section id="services">
-    <h2>Our Core Services</h2>
-      <div class="services-cards">
-      <div class="card" style="height:220px;">
-        <img class="card-overlay" src="https://imgur.com/qqwyhuV.png" alt="" style="height:220px; width:100%; object-fit:cover;">
-        <img class="glow-icon" src="https://imgur.com/hA0Ghts.png" alt="Show Calling Icon" width="80" height="80">
-        <h3 style="color: #fff;">Show Calling</h3>
-          <p class="glow-text" style="color: #fff;">Expert cue management for seamless event flow.</p>
-          <a
-            href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Show%20Calling&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Show%20Calling%20services.%20Please%20share%20details%20and%20availability.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]"
-            class="btn-overlay"
-          >Learn More</a>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">What We Do</span>
+        <h2>Our Core Services</h2>
+        <p>Experienced crews for every role on your production.</p>
       </div>
-      <div class="card" style="background:url('https://imgur.com/eMu9KVJ.png') center/cover no-repeat; height:220px;">
-        <img class="glow-icon" src="https://imgur.com/yAJ58Sc.png" alt="Audio Engineering Icon" width="80" height="80">
-        <h3 class="glow-text" style="color: #fff;">Audio Engineering</h3>
-        <p class="glow-text" style="color: #fff;">Professional FOH and Monitoring Engineering.</p>
-        <a
-          href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Audio%20Engineering&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Audio%20Engineering%20services.%20Please%20share%20details%20and%20availability.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]"
-          class="btn-overlay"
-        >Learn More</a>
-      </div>
-      <div class="card" style="height:220px;">
-        <img class="card-overlay" src="https://imgur.com/a72fD2U.png" alt="" style="height:220px; width:100%; object-fit:cover;">
-        <img src="https://imgur.com/uWosRFh.png" alt="Video Streaming Icon" width="80" height="80">
-        <h3 class="glow-text" style="color: #fff;">Video &amp; Streaming</h3>
-        <p class="glow-text" style="color: #fff;">High-definition video and live stream support.</p>
-          <a
-            href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Video%20%26%20Streaming&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Video%20%26%20Streaming%20services.%20Please%20share%20details%20and%20availability.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]"
-            class="btn-overlay"
-          >Learn More</a>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <img class="card-bg" src="https://imgur.com/qqwyhuV.png" alt="">
+          <div class="service-card-body">
+            <h3>Show Calling</h3>
+            <p>Expert cue management for seamless event flow.</p>
+            <a href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Show%20Calling&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Show%20Calling%20services.%20Please%20share%20details%20and%20availability.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]" class="btn-learn">Learn More</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="card-bg" src="https://imgur.com/yAJ58Sc.png" alt="">
+          <div class="service-card-body">
+            <h3>Audio Engineering</h3>
+            <p>Professional FOH and Monitoring Engineering.</p>
+            <a href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Audio%20Engineering&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Audio%20Engineering%20services.%20Please%20share%20details%20and%20availability.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]" class="btn-learn">Learn More</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <img class="card-bg" src="https://imgur.com/uWosRFh.png" alt="">
+          <div class="service-card-body">
+            <h3>Video &amp; Streaming</h3>
+            <p>High-definition video and live stream support.</p>
+            <a href="mailto:sheeksolutions@gmail.com?subject=Learn%20More%3A%20Video%20%26%20Streaming&body=Hi%20Sheek%20Solutions%2C%0A%0AI%E2%80%99m%20interested%20in%20Video%20%26%20Streaming%20services.%20Please%20share%20details%20and%20availability.%0A%0AEvent%20date%3A%20%0ALocation%3A%20%0ABudget%3A%20%0A%0AThanks%2C%0A[Your%20Name]" class="btn-learn">Learn More</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Brand Video Section -->
+  <!-- ── BRAND VIDEO ── -->
   <section id="brand-video">
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/B3VA3FPh9FY?autoplay=1&mute=1&loop=1&playlist=B3VA3FPh9FY" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="container">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/B3VA3FPh9FY?autoplay=1&mute=1&loop=1&playlist=B3VA3FPh9FY" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
     </div>
   </section>
 
-  <!-- Clients Carousel -->
+  <!-- ── CLIENTS ── -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Clients</span>
+        <h2>Trusted By</h2>
+      </div>
+      <div class="clients-carousel">
+        <img src="https://imgur.com/rNRtMwl.png" alt="Client Logo">
+        <img src="https://i.imgur.com/DjIk4EQ.png" alt="OnServices Logo">
+        <img src="https://imgur.com/3RhWw3v.png" alt="Client Logo">
+        <img src="https://imgur.com/t58NI20.png" alt="Client Logo">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY SHEEK ── -->
   <section>
-    <h2>Trusted By</h2>
-    <div class="clients-carousel">
-      <img src="https://imgur.com/rNRtMwl.png" alt="Client Logo">
-      <img src="https://i.imgur.com/DjIk4EQ.png" alt="OnServices Logo">
-      <img src="https://imgur.com/3RhWw3v.png" alt="Client Logo">
-      <img src="https://imgur.com/t58NI20.png" alt="Client Logo">
-      <!-- Add more logos -->
-    </div>
-  </section>
-
-  <!-- Why Sheek Solutions -->
-  <section>
-    <div class="three-cols">
-      <div class="col">
-        <h4>Reliability</h4>
-        <p>Always on time, always prepared.</p>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Standards</span>
+        <h2>Why Sheek Solutions</h2>
       </div>
-      <div class="col">
-        <h4>Technical Excellence</h4>
-        <p>Vetted and certified professionals.</p>
-      </div>
-      <div class="col">
-        <h4>Safety & Compliance</h4>
-        <p>Adhering to industry standards.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⏱️</div>
+          <h4>Reliability</h4>
+          <p>Always on time, always prepared.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🎛️</div>
+          <h4>Technical Excellence</h4>
+          <p>Vetted and certified professionals.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🛡️</div>
+          <h4>Safety &amp; Compliance</h4>
+          <p>Adhering to industry standards.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Rates & Packages Section -->
+  <!-- ── RATES & PACKAGES ── -->
   <section id="rates">
-    <h2>Rates &amp; Packages</h2>
-    <button class="rq-btn" data-quote-trigger>Request a Quote</button>
+    <div class="container">
+      <div class="section-header">
+        <h2>Rates &amp; Packages</h2>
+        <p>Transparent pricing tailored to your production needs. Request a quote for a custom breakdown.</p>
+      </div>
+      <div style="text-align:center;">
+        <button class="btn btn-white" data-quote-trigger>Request a Quote</button>
+      </div>
+    </div>
   </section>
 
-  <!-- Careers Section -->
-  <section id="careers">
-    <h2>Join Our Crew</h2>
-    <p>We’re always looking for top-tier AV talent.</p>
-    <form id="joinCrewForm">
-      <input type="text" name="entry.1111111" placeholder="Full Name" required>
-      <input type="email" name="entry.2222222" placeholder="Email Address" required>
-      <input type="text" name="entry.3333333" placeholder="Position Interested" required>
-      <textarea name="entry.4444444" placeholder="Your Experience"></textarea>
-      <button type="submit">Submit</button>
-    </form>
-    <script>
-      document.getElementById('joinCrewForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const fullName = encodeURIComponent(document.querySelector('input[name="entry.1111111"]').value);
-        const email = encodeURIComponent(document.querySelector('input[name="entry.2222222"]').value);
-        const position = encodeURIComponent(document.querySelector('input[name="entry.3333333"]').value);
-        const experience = encodeURIComponent(document.querySelector('textarea[name="entry.4444444"]').value);
-        const url = 'https://docs.google.com/forms/d/e/1FAIpQLSdgqxCoVbSnsVnLkvFDJxypx4qPWJk6Ob-Z9fq1j0s_AmSR4A/viewform'
-          + '?entry.1111111=' + fullName
-          + '&entry.2222222=' + email
-          + '&entry.3333333=' + position
-          + '&entry.4444444=' + experience;
-        location.href = url;
-      });
-    </script>
+  <!-- ── CAREERS ── -->
+  <section id="careers" class="alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Join the Team</span>
+        <h2>Join Our Crew</h2>
+        <p>We're always looking for top-tier AV talent.</p>
+      </div>
+      <div class="careers-form-wrap">
+        <form id="joinCrewForm">
+          <input type="text" name="entry.1111111" placeholder="Full Name" required>
+          <input type="email" name="entry.2222222" placeholder="Email Address" required>
+          <input type="text" name="entry.3333333" placeholder="Position Interested" required>
+          <textarea name="entry.4444444" placeholder="Your Experience" rows="4"></textarea>
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
+    </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- ── CONTACT ── -->
   <section id="contact">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
-      <input type="text" name="entry.5555555" placeholder="Name" required>
-      <input type="email" name="entry.6666666" placeholder="Email" required>
-      <input type="text" name="entry.7777777" placeholder="Company / Event">
-      <input type="date" name="entry.8888888" placeholder="Event Date">
-      <textarea name="entry.9999999" placeholder="How can we help?" rows="5"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <script>
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = encodeURIComponent(document.querySelector('input[name="entry.5555555"]').value);
-        const email = encodeURIComponent(document.querySelector('input[name="entry.6666666"]').value);
-        const company = encodeURIComponent(document.querySelector('input[name="entry.7777777"]').value);
-        const eventDate = encodeURIComponent(document.querySelector('input[name="entry.8888888"]').value);
-        const help = encodeURIComponent(document.querySelector('textarea[name="entry.9999999"]').value);
-        const url = 'https://docs.google.com/forms/d/1F3SLM3PdFjhNzDWym0dgJtzDz9ckosf8ikLd9_evwNE/viewform'
-          + '?entry.5555555=' + name
-          + '&entry.6666666=' + email
-          + '&entry.7777777=' + company
-          + '&entry.8888888=' + eventDate
-          + '&entry.9999999=' + help;
-        location.href = url;
-      });
-    </script>
-    <p>Phone: 818-216-7329 | Email: info@sheeksolutions.com</p>
-    <div id="osm-map" style="width:100%;height:300px;border-radius:8px;"></div>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Get In Touch</span>
+        <h2>Contact Us</h2>
+      </div>
+      <div class="contact-grid">
+
+        <div>
+          <form id="contactForm">
+            <input type="text" name="entry.5555555" placeholder="Name" required>
+            <input type="email" name="entry.6666666" placeholder="Email" required>
+            <input type="text" name="entry.7777777" placeholder="Company / Event">
+            <input type="date" name="entry.8888888">
+            <textarea name="entry.9999999" placeholder="How can we help?" rows="4"></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+
+        <div>
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <span class="ci-icon">📞</span>
+              <div>
+                <span class="ci-label">Phone</span>
+                <a href="tel:+18182167329">818-216-7329</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <span class="ci-icon">✉️</span>
+              <div>
+                <span class="ci-label">Email</span>
+                <a href="mailto:info@sheeksolutions.com">info@sheeksolutions.com</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <span class="ci-icon">📍</span>
+              <div>
+                <span class="ci-label">Address</span>
+                5036 N 54th Ave, STE 7<br>Glendale, AZ 85301
+              </div>
+            </div>
+          </div>
+          <div id="osm-map"></div>
+        </div>
+
+      </div>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ── FOOTER ── -->
   <footer>
-    <p>&copy; 2025 Sheek Solutions LLC. All rights reserved.</p>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="https://imgur.com/1qSwsv5.png" alt="Sheek Solutions Logo" class="logo-img">
+          <p>Nationwide AV &amp; Production staffing for corporate events, broadcast, and live productions.</p>
+        </div>
+        <div>
+          <div class="footer-nav-heading">Navigation</div>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="#services">Services</a>
+            <a href="rental.html">Rental</a>
+            <a href="#rates">Rates</a>
+            <a href="#careers">Careers</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Sheek Solutions LLC. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Leaflet CSS/JS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
+  <!-- ── LEAFLET ── -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+  <!-- Map init -->
   <script>
-    (function(){
-      const raw = '5036 N 54th Ave, STE 7, Glendale AZ 85301';
-      const q = raw.replace(/\b(ste|suite)\s*\d+\b/i, '').trim();
-      const address = raw;
-
-      function initMap(lat, lon){
-        const map = L.map('osm-map').setView([lat, lon], 17);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-        L.marker([lat, lon]).addTo(map).bindPopup(address).openPopup();
-      }
-
-      // Geocode the address with Nominatim, then render the map
-      fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=us&limit=1&q=' + encodeURIComponent(q))
-        .then(r => r.json())
-        .then(d => d[0] ? initMap(+d[0].lat, +d[0].lon) : initMap(33.5387, -112.1860))
-        .catch(() => initMap(33.5387, -112.1860));
-    })();
+  (function(){
+    var raw = '5036 N 54th Ave, STE 7, Glendale AZ 85301';
+    var q = raw.replace(/\b(ste|suite)\s*\d+\b/i, '').trim();
+    function initMap(lat, lon){
+      var map = L.map('osm-map').setView([lat, lon], 17);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+      L.marker([lat, lon]).addTo(map).bindPopup(raw).openPopup();
+    }
+    fetch('https://nominatim.openstreetmap.org/search?format=json&countrycodes=us&limit=1&q=' + encodeURIComponent(q))
+      .then(function(r){ return r.json(); })
+      .then(function(d){ d[0] ? initMap(+d[0].lat, +d[0].lon) : initMap(33.5387, -112.1860); })
+      .catch(function(){ initMap(33.5387, -112.1860); });
+  })();
   </script>
 
-<!-- ===== Sheek Solutions • Request a Quote (drop-in) ===== -->
-<script>
-(function(){
-  // ---------- Inject minimal CSS ----------
-  const css = `
-  .rq-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.6);display:none;align-items:center;justify-content:center;padding:1rem;z-index:9999}
-  .rq-backdrop.open{display:flex}
-  .rq-modal{width:min(640px,100%);background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.35);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto}
-  .rq-head{display:flex;justify-content:space-between;gap:.75rem;align-items:center;padding:14px 18px;border-bottom:1px solid #eee;color:#0b3a78;font-weight:800}
-  .rq-body{padding:16px 18px;display:grid;gap:12px}
-  .rq-row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-  @media (max-width:760px){.rq-row{grid-template-columns:1fr}}
-  .rq-label{font-size:.9rem;font-weight:700;color:#334155}
-  .rq-inp,.rq-area{width:100%;margin-top:6px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px;font-size:1rem}
-  .rq-area{min-height:110px}
-  .rq-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;padding:14px 18px;border-top:1px solid #eee}
-  .rq-btn{background:#FFA500;color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
-  .rq-outline{background:#fff;color:#0b3a78;border:1px solid #0b3a78;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
-  .rq-secondary{background:#e5e7eb;color:#111827;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
-  .rq-note{font-size:.82rem;color:#6b7280}
-  `;
-  const style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
-
-  // ---------- Build modal ----------
-  const wrap = document.createElement('div');
-  wrap.className = 'rq-backdrop'; wrap.id = 'rq-wrap';
-  wrap.innerHTML = `
-    <div class="rq-modal" role="dialog" aria-modal="true" aria-labelledby="rq-title">
-      <div class="rq-head">
-        <div id="rq-title">Rates &amp; Packages — Quick Details</div>
-        <button class="rq-outline" type="button" id="rq-close">✕</button>
-      </div>
-      <form class="rq-body" id="rq-form">
-        <div class="rq-row">
-          <label class="rq-label">Location (City, Venue) *<input id="rq_loc" class="rq-inp" placeholder="Phoenix • Convention Center"></label>
-          <label class="rq-label">Dates *<input id="rq_dates" class="rq-inp" placeholder="Apr 12–15, 2025"></label>
-        </div>
-        <label class="rq-label">Positions Needed *<input id="rq_roles" class="rq-inp" placeholder="Show Caller (1), A1 (1), V1 (1), LED Tech (2)"></label>
-        <label class="rq-label">Schedule / Notes<textarea id="rq_notes" class="rq-area" placeholder="Load-in 4/12 07:00, Rehearsal 4/13 15:00, Show 4/14 09:00, Load-out 4/15 18:00. Union house, dock access limited."></textarea></label>
-        <div class="rq-row">
-          <label class="rq-label">Your Name *<input id="rq_name" class="rq-inp" placeholder="First Last"></label>
-          <label class="rq-label">Email *<input id="rq_email" class="rq-inp" type="email" placeholder="you@company.com"></label>
-        </div>
-        <div class="rq-row">
-          <label class="rq-label">Company<input id="rq_co" class="rq-inp" placeholder="Organization (optional)"></label>
-          <label class="rq-label">Phone<input id="rq_phone" class="rq-inp" placeholder="###-###-#### (optional)"></label>
-        </div>
-        <div class="rq-note">* required • This will open a pre-filled email to <b>sheeksolutions@gmail.com</b>.</div>
-        <div class="rq-actions">
-          <button class="rq-secondary" type="button" id="rq-cancel">Cancel</button>
-          <button class="rq-outline"  type="button" id="rq-gmail">Open in Gmail</button>
-          <button class="rq-btn"      type="submit">Email Details</button>
-        </div>
-      </form>
-    </div>`;
-  document.body.appendChild(wrap);
-
-  // ---------- Helpers ----------
-  const open = () => wrap.classList.add('open');
-  const close = () => wrap.classList.remove('open');
-  const v = id => (document.getElementById(id)?.value || '').trim();
-  const valid = () => {
-    if (!v('rq_loc') || !v('rq_dates') || !v('rq_roles') || !v('rq_name') || !/.+@.+\..+/.test(v('rq_email'))) {
-      alert('Please complete Location, Dates, Positions, Name, and a valid Email.');
-      return false;
-    }
-    return true;
-  };
-  const build = () => {
-    const to = 'sheeksolutions@gmail.com';
-    const subject = 'Quote Requested from Sheek Solutions Website';
-    const lines = [
-      'Hello Sheek Solutions Team,','',
-      'Please provide a quote for corporate AV/Production labor based on the details below.','',
-      '— Project —',
-      `Location: ${v('rq_loc')}`,
-      `Dates: ${v('rq_dates')}`,
-      `Positions Needed: ${v('rq_roles')}`,
-      `Schedule/Notes: ${v('rq_notes') || '—'}`,'',
-      '— Contact —',
-      `Name: ${v('rq_name')}`,
-      `Email: ${v('rq_email')}`,
-      `Company: ${v('rq_co') || '—'}`,
-      `Phone: ${v('rq_phone') || '—'}`,'',
-      'Thank you!'
-    ];
-    const body = encodeURIComponent(lines.join('\n'));
-    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${body}`;
-    const gmail  = 'https://mail.google.com/mail/?view=cm&fs=1'
-                 + `&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${body}`;
-    return { mailto, gmail };
-  };
-
-  // ---------- Close & submit handlers ----------
-  document.getElementById('rq-close').addEventListener('click', close);
-  document.getElementById('rq-cancel').addEventListener('click', close);
-  wrap.addEventListener('click', e => { if(e.target===wrap) close(); });
-  document.addEventListener('keydown', e => { if(e.key==='Escape') close(); });
-
-  document.getElementById('rq-gmail').addEventListener('click', ()=>{
-    if(!valid()) return;
-    const { gmail } = build();
-    window.open(gmail, '_blank', 'noopener');
-    close();
-  });
-
-  document.getElementById('rq-form').addEventListener('submit', e=>{
+  <!-- Careers form -->
+  <script>
+  document.getElementById('joinCrewForm').addEventListener('submit', function(e){
     e.preventDefault();
-    if(!valid()) return;
-    const { mailto, gmail } = build();
-
-    // Try default mail app; if no handler, fall back to Gmail
-    const before = Date.now();
-    window.location.href = mailto;
-    setTimeout(()=>{ if(Date.now() - before < 1200) window.open(gmail,'_blank','noopener'); }, 700);
-    close();
+    var fullName = encodeURIComponent(document.querySelector('input[name="entry.1111111"]').value);
+    var email    = encodeURIComponent(document.querySelector('input[name="entry.2222222"]').value);
+    var position = encodeURIComponent(document.querySelector('input[name="entry.3333333"]').value);
+    var experience = encodeURIComponent(document.querySelector('textarea[name="entry.4444444"]').value);
+    location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdgqxCoVbSnsVnLkvFDJxypx4qPWJk6Ob-Z9fq1j0s_AmSR4A/viewform'
+      + '?entry.1111111=' + fullName
+      + '&entry.2222222=' + email
+      + '&entry.3333333=' + position
+      + '&entry.4444444=' + experience;
   });
-})();
-</script>
-<!-- ===== /Sheek Solutions • Request a Quote ===== -->
+  </script>
 
-<!-- === Fix: make hero "Request a Quote" clickable + open the same modal === -->
-<style>
-  /* The hero overlay was sitting on top and eating clicks */
-  .hero { position: relative; }
-  .hero::after { pointer-events: none !important; z-index: 0 !important; }
-  .hero-content { position: relative; z-index: 1; }
-</style>
+  <!-- Contact form -->
+  <script>
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name      = encodeURIComponent(document.querySelector('input[name="entry.5555555"]').value);
+    var email     = encodeURIComponent(document.querySelector('input[name="entry.6666666"]').value);
+    var company   = encodeURIComponent(document.querySelector('input[name="entry.7777777"]').value);
+    var eventDate = encodeURIComponent(document.querySelector('input[name="entry.8888888"]').value);
+    var help      = encodeURIComponent(document.querySelector('textarea[name="entry.9999999"]').value);
+    location.href = 'https://docs.google.com/forms/d/1F3SLM3PdFjhNzDWym0dgJtzDz9ckosf8ikLd9_evwNE/viewform'
+      + '?entry.5555555=' + name
+      + '&entry.6666666=' + email
+      + '&entry.7777777=' + company
+      + '&entry.8888888=' + eventDate
+      + '&entry.9999999=' + help;
+  });
+  </script>
 
-<script>
-(function () {
-  // Find the hero CTA (by id or by visible text)
-  var heroBtn =
-    document.getElementById('rq-open') ||
-    Array.from(document.querySelectorAll('.hero button, .hero a'))
-      .find(function (el) { return (el.textContent || '').trim().toLowerCase() === 'request a quote'; });
+  <!-- ── REQUEST A QUOTE MODAL ── -->
+  <script>
+  (function(){
+    var css = [
+      '.rq-backdrop{position:fixed;inset:0;background:rgba(2,6,23,.6);display:none;align-items:center;justify-content:center;padding:1rem;z-index:9999}',
+      '.rq-backdrop.open{display:flex}',
+      '.rq-modal{width:min(640px,100%);background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.35);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto}',
+      '.rq-head{display:flex;justify-content:space-between;gap:.75rem;align-items:center;padding:14px 18px;border-bottom:1px solid #eee;color:#0b3a78;font-weight:800}',
+      '.rq-body{padding:16px 18px;display:grid;gap:12px}',
+      '.rq-row{display:grid;gap:12px;grid-template-columns:1fr 1fr}',
+      '@media(max-width:760px){.rq-row{grid-template-columns:1fr}}',
+      '.rq-label{font-size:.9rem;font-weight:700;color:#334155}',
+      '.rq-inp,.rq-area{width:100%;margin-top:6px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:10px;font-size:1rem}',
+      '.rq-area{min-height:110px}',
+      '.rq-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;padding:14px 18px;border-top:1px solid #eee}',
+      '.rq-btn{background:#FFA500;color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}',
+      '.rq-outline{background:#fff;color:#0b3a78;border:1px solid #0b3a78;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}',
+      '.rq-secondary{background:#e5e7eb;color:#111827;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}',
+      '.rq-note{font-size:.82rem;color:#6b7280}'
+    ].join('');
+    var style = document.createElement('style');
+    style.textContent = css;
+    document.head.appendChild(style);
 
-  // Your modal wrapper (the one that uses .open)
-  var modal = document.getElementById('rq-wrap');
+    var wrap = document.createElement('div');
+    wrap.className = 'rq-backdrop';
+    wrap.id = 'rq-wrap';
+    wrap.innerHTML = [
+      '<div class="rq-modal" role="dialog" aria-modal="true" aria-labelledby="rq-title">',
+        '<div class="rq-head">',
+          '<div id="rq-title">Rates &amp; Packages — Quick Details</div>',
+          '<button class="rq-outline" type="button" id="rq-close">✕</button>',
+        '</div>',
+        '<form class="rq-body" id="rq-form">',
+          '<div class="rq-row">',
+            '<label class="rq-label">Location (City, Venue) *<input id="rq_loc" class="rq-inp" placeholder="Phoenix • Convention Center"></label>',
+            '<label class="rq-label">Dates *<input id="rq_dates" class="rq-inp" placeholder="Apr 12–15, 2025"></label>',
+          '</div>',
+          '<label class="rq-label">Positions Needed *<input id="rq_roles" class="rq-inp" placeholder="Show Caller (1), A1 (1), V1 (1), LED Tech (2)"></label>',
+          '<label class="rq-label">Schedule / Notes<textarea id="rq_notes" class="rq-area" placeholder="Load-in 4/12 07:00, Rehearsal 4/13 15:00, Show 4/14 09:00…"></textarea></label>',
+          '<div class="rq-row">',
+            '<label class="rq-label">Your Name *<input id="rq_name" class="rq-inp" placeholder="First Last"></label>',
+            '<label class="rq-label">Email *<input id="rq_email" class="rq-inp" type="email" placeholder="you@company.com"></label>',
+          '</div>',
+          '<div class="rq-row">',
+            '<label class="rq-label">Company<input id="rq_co" class="rq-inp" placeholder="Organization (optional)"></label>',
+            '<label class="rq-label">Phone<input id="rq_phone" class="rq-inp" placeholder="###-###-#### (optional)"></label>',
+          '</div>',
+          '<div class="rq-note">* required • This will open a pre-filled email to <b>sheeksolutions@gmail.com</b>.</div>',
+          '<div class="rq-actions">',
+            '<button class="rq-secondary" type="button" id="rq-cancel">Cancel</button>',
+            '<button class="rq-outline"   type="button" id="rq-gmail">Open in Gmail</button>',
+            '<button class="rq-btn"       type="submit">Email Details</button>',
+          '</div>',
+        '</form>',
+      '</div>'
+    ].join('');
+    document.body.appendChild(wrap);
 
-  function openQuote(e){
-    e && e.preventDefault();
-    if (modal) modal.classList.add('open');
-  }
+    function openModal(){ wrap.classList.add('open'); }
+    function closeModal(){ wrap.classList.remove('open'); }
+    function v(id){ return (document.getElementById(id) && document.getElementById(id).value || '').trim(); }
+    function valid(){
+      if(!v('rq_loc') || !v('rq_dates') || !v('rq_roles') || !v('rq_name') || !/.+@.+\..+/.test(v('rq_email'))){
+        alert('Please complete Location, Dates, Positions, Name, and a valid Email.');
+        return false;
+      }
+      return true;
+    }
+    function build(){
+      var to = 'sheeksolutions@gmail.com';
+      var subject = 'Quote Requested from Sheek Solutions Website';
+      var lines = [
+        'Hello Sheek Solutions Team,', '',
+        'Please provide a quote for corporate AV/Production labor based on the details below.', '',
+        '— Project —',
+        'Location: ' + v('rq_loc'),
+        'Dates: ' + v('rq_dates'),
+        'Positions Needed: ' + v('rq_roles'),
+        'Schedule/Notes: ' + (v('rq_notes') || '—'), '',
+        '— Contact —',
+        'Name: ' + v('rq_name'),
+        'Email: ' + v('rq_email'),
+        'Company: ' + (v('rq_co') || '—'),
+        'Phone: ' + (v('rq_phone') || '—'), '',
+        'Thank you!'
+      ];
+      var body = encodeURIComponent(lines.join('\n'));
+      return {
+        mailto: 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subject) + '&body=' + body,
+        gmail:  'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + encodeURIComponent(subject) + '&body=' + body
+      };
+    }
 
-  if (heroBtn) {
-    heroBtn.type = 'button';              // don’t submit any forms
-    heroBtn.addEventListener('click', openQuote);
-  }
-})();
-</script>
-<!-- === /Fix === -->
+    document.getElementById('rq-close').addEventListener('click', closeModal);
+    document.getElementById('rq-cancel').addEventListener('click', closeModal);
+    wrap.addEventListener('click', function(e){ if(e.target === wrap) closeModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 
-<!-- === MOBILE SCROLL FIX for Quote Modal === -->
-<style>
-  /* Use dynamic viewport on mobile; fall back to vh */
-  :root { --vh: 100dvh; } /* updated by JS below */
+    document.getElementById('rq-gmail').addEventListener('click', function(){
+      if(!valid()) return;
+      window.open(build().gmail, '_blank', 'noopener');
+      closeModal();
+    });
+    document.getElementById('rq-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!valid()) return;
+      var urls = build();
+      var before = Date.now();
+      window.location.href = urls.mailto;
+      setTimeout(function(){ if(Date.now() - before < 1200) window.open(urls.gmail, '_blank', 'noopener'); }, 700);
+      closeModal();
+    });
 
-  /* The modal container must flex vertically and cap to viewport height */
-  .rq-modal, .modal {
-    display: flex;
-    flex-direction: column;
-    width: min(680px, 100%);
-    max-height: calc(var(--vh) - 24px); /* keep some breathing room */
-    border-radius: 14px;
-    overflow: hidden; /* clip internals */
-  }
+    // Wire every [data-quote-trigger] on the page
+    document.querySelectorAll('[data-quote-trigger]').forEach(function(btn){
+      btn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    });
+  })();
+  </script>
 
-  /* The scrolling body area */
-  .rq-body, #ratesForm {
-    flex: 1 1 auto;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; /* iOS momentum */
-    padding: 16px 18px;
-  }
-
-  /* Keep the button row visible; pad for iPhone home indicator */
-  .rq-actions, .modal .actions {
-    position: sticky;
-    bottom: 0;
-    background: #fff;
-    padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0));
-    border-top: 1px solid #eee;
-    z-index: 1;
-  }
-
-  /* Prevent page behind the modal from scrolling */
-  html.modal-open, body.modal-open { overflow: hidden; height: 100%; }
-
-  /* Just in case a backdrop/overlay intercepts taps */
-  .rq-backdrop, #ratesModal { align-items: center; justify-content: center; }
-  .rq-backdrop::before, .rq-backdrop::after,
-  #ratesModal::before,  #ratesModal::after { pointer-events: none; }
-</style>
-
-<script>
-  // Use visual viewport to set an accurate --vh on mobile (especially iOS with keyboard)
-  (function () {
-    const setVH = () => {
-      const h = (window.visualViewport && visualViewport.height) || window.innerHeight;
-      document.documentElement.style.setProperty('--vh', `${h}px`);
-    };
+  <!-- Mobile viewport height + scroll lock -->
+  <script>
+  (function(){
+    function setVH(){
+      var h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+      document.documentElement.style.setProperty('--vh', h + 'px');
+    }
     setVH();
     window.addEventListener('resize', setVH);
-    window.visualViewport && visualViewport.addEventListener('resize', setVH);
+    if(window.visualViewport) window.visualViewport.addEventListener('resize', setVH);
 
-    // Lock/unlock background scroll whenever the modal opens/closes
-    const wrap = document.getElementById('rq-wrap') || document.getElementById('ratesModal');
-    if (wrap) {
-      const toggleLock = (on) => {
+    var wrap = document.getElementById('rq-wrap');
+    if(wrap){
+      function toggleLock(on){
         document.documentElement.classList.toggle('modal-open', on);
         document.body.classList.toggle('modal-open', on);
-        setVH(); // recalc in case keyboard changed viewport
-      };
-      // Observe class changes: .open (rq) or .show (simple)
-      new MutationObserver(() => {
-        const shown = wrap.classList.contains('open') || wrap.classList.contains('show');
-        toggleLock(shown);
-      }).observe(wrap, { attributes: true, attributeFilter: ['class'] });
+        setVH();
+      }
+      new MutationObserver(function(){
+        toggleLock(wrap.classList.contains('open') || wrap.classList.contains('show'));
+      }).observe(wrap, { attributes:true, attributeFilter:['class'] });
+    }
+  })();
+  </script>
 
-      // Also close on backdrop click (safety)
-      wrap.addEventListener('click', (e) => {
-        if (e.target === wrap) {
-          wrap.classList.remove('open'); wrap.classList.remove('show');
-        }
-      });
-      // Close on ESC
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') { wrap.classList.remove('open'); wrap.classList.remove('show'); }
+  <!-- Nav toggle -->
+  <script>
+  (function(){
+    var header = document.querySelector('header');
+    var toggle = document.getElementById('navToggle');
+    if(toggle && header){
+      toggle.addEventListener('click', function(){
+        var open = header.classList.toggle('nav-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     }
   })();
-</script>
-<!-- === /MOBILE SCROLL FIX === -->
-
-  <script>
-    (function(){
-      const header = document.querySelector('header');
-      const toggle = document.getElementById('navToggle');
-      if (toggle && header) {
-        toggle.addEventListener('click', function(){
-          const open = header.classList.toggle('nav-open');
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-      }
-    })();
   </script>
+
 </body>
 </html>

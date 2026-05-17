@@ -1,111 +1,69 @@
-/* Global safe helper */
-img, video { max-width: 100%; height: auto; }
+/* ── GLOBAL SAFE HELPERS ─────────────────────────────── */
+img, video { max-width:100%; height:auto; }
 
-/* base */
-.nav-logo .logo-img{
+/* ── NAV LOGO ─────────────────────────────────────────── */
+.nav-logo .logo-img {
   width:auto;
   object-fit:contain;
   display:block;
 }
 
-/* Mobile-only alternate hero title (hidden by default; shown at <=768px) */
-.hero-title-mobile{
-  display: none;
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  margin: 0 0 1rem;
-  color: var(--primary-color);
-  text-align: center;
-}
-
-
-
-/* <=900px — mobile/tablet nav */
-@media (max-width: 900px){
-  .nav-container{ flex-wrap: wrap; gap: .5rem; align-items: center; }
-  .nav-logo .logo-img{ max-height: 31px !important; }
+/* ── TABLET / SMALL DESKTOP  ≤900px ──────────────────── */
+@media (max-width:900px){
+  .nav-container{ flex-wrap:wrap; gap:.5rem; align-items:center; }
+  .nav-logo .logo-img{ max-height:31px; }
 
   .nav-toggle{
-    display: inline-block;
-    background: var(--primary-color);
-    color: #fff;
-    border: 0;
-    padding: .5rem .75rem;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 1.125rem;
-    line-height: 1;
+    display:inline-flex;
+    align-items:center; justify-content:center;
+    background:var(--primary, #003366);
+    color:#fff; border:0;
+    padding:.5rem .8rem;
+    border-radius:6px;
+    font-weight:700; font-size:1.125rem; line-height:1;
+    cursor:pointer;
   }
 
-  #mainNav{ display: none; width: 100%; }
-  header.nav-open #mainNav{ display: block; }
-  #mainNav ul{ display: flex; flex-direction: column; gap: .75rem; padding-top: .5rem; }
+  #mainNav{ display:none; width:100%; order:3; }
+  header.nav-open #mainNav{ display:block; }
+  #mainNav ul{ display:flex; flex-direction:column; gap:.65rem; padding:.5rem 0 .25rem; }
 }
 
-/* <=768px — phones/small tablets */
-@media (max-width: 768px){
-  /* spacing */
-  section{ padding: 2.5rem 1rem; }
+/* ── MOBILE  ≤768px ──────────────────────────────────── */
+@media (max-width:768px){
+  section{ padding:3rem 0; }
 
-  /* stop using the background so text can't overlap the wordmark */
-  .hero{ padding-top: 1rem; }
+  /* Hero */
+  .hero{ min-height:unset; padding:2.5rem 1.25rem; }
+  .hero-art-mobile{ width:72vw; max-width:320px; }
 
-  /* keep only the mobile title visible and keep it smaller */
-  .hero-title-desktop{ display: none; }
-  .hero-title-mobile{
-    display: block;
-    font-size: 1.5rem;
-    line-height: 1.15;
-    margin: 0 0 1.25rem;
-  }
+  /* Services */
+  .services-grid{ grid-template-columns:1fr; gap:1.25rem; }
+  .service-card{ min-height:240px; }
 
-  /* type sizes */
-  .hero-content p { font-size: 1rem; }
+  /* Why grid */
+  .why-grid{ grid-template-columns:1fr; }
 
-  /* cards/grid */
-  .services-cards{ grid-template-columns: 1fr; gap: 1rem; }
-  .card{ height: auto !important; padding-bottom: 1rem; border-radius: 8px; overflow: hidden; }
-  .card .card-overlay{ width: 100%; height: auto !important; aspect-ratio: 16/9; object-fit: cover; }
-  .btn-overlay{ display: inline-block; margin-top: .5rem; visibility: visible; opacity: 1; }
+  /* Rental */
+  .rental-grid{ grid-template-columns:1fr; }
+
+  /* Contact */
+  .contact-grid{ grid-template-columns:1fr; }
+
+  /* Footer */
+  .footer-inner{ grid-template-columns:1fr; }
 }
 
-/* <=480px — small phones */
-@media (max-width: 480px){
-  .btn-primary, .btn, .btn-overlay{ padding: .9rem 1.1rem; font-size: 1rem; }
-  input, textarea, select{ font-size: 16px; } /* prevent iOS zoom on focus */
+/* ── SMALL PHONES  ≤480px ────────────────────────────── */
+@media (max-width:480px){
+  .btn{ padding:.85rem 1.25rem; font-size:.95rem; }
+  input, textarea, select{ font-size:16px; } /* prevent iOS zoom on focus */
+
+  .section-header h2{ font-size:1.5rem; }
 }
 
-/* Hero load-in animation */
-.hero{
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeSlideUp 2.5s ease forwards;
-  will-change: transform, opacity;
-}
-
-@keyframes fadeSlideUp{
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .hero{ animation: none; opacity: 1; transform: none; }
-}
-
-/* Desktop-only header adjustments */
-@media (min-width: 1024px){
-  .nav-logo .logo-img{
-    max-height:36px !important;      /* 10% smaller than 40px */
-    width:auto;
-    height:auto;
-    display:block;                 /* avoids baseline gap */
-    transform:none !important;     /* cancel any previous scale() rules */
-  }
-  .nav-container{
-    padding-block:0.9rem;          /* bump if you still see clipping */
-    overflow:visible;              /* ensure nothing gets chopped */
-  }
+/* ── DESKTOP  ≥1024px ────────────────────────────────── */
+@media (min-width:1024px){
+  .nav-logo .logo-img{ max-height:36px; }
+  .nav-container{ overflow:visible; }
 }
